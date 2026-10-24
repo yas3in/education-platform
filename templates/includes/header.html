@@ -1,0 +1,35 @@
+<header class="site-header sticky-top py-3">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg site-navbar glass-navbar px-3 px-lg-4 py-2" dir="ltr">
+            <!-- Mobile: Left Hamburger Toggler -->
+            <button class="navbar-toggler border-0 shadow-none p-1 order-1" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Desktop Left / Mobile Center: Login & Register -->
+            <div class="d-flex align-items-center gap-2 order-2 order-lg-1">
+                <a href="{% url 'account_front:auth' %}?mode=login" data-auth-mode="login" class="btn btn-glass-outline rounded-pill px-3 py-1 fw-medium nav-auth-btn">ورود</a>
+                <a href="{% url 'account_front:auth' %}?mode=signup" data-auth-mode="signup" class="btn btn-brand rounded-pill px-3 py-1 fw-medium nav-auth-btn">ثبت نام</a>
+            </div>
+
+            <!-- Always Right (outside collapse): Logo -->
+            <a class="navbar-brand fw-bold d-flex align-items-center gap-2 m-0 order-3 order-lg-3" href="{% url 'documents_front:index' %}">
+                <span class="logo-badge">U</span>
+                <span>Logo</span>
+            </a>
+
+            <!-- Desktop Center / Mobile Collapsible Drawer: Navigation Links -->
+            <div class="collapse navbar-collapse order-4 order-lg-2" id="mainNav">
+                <ul class="navbar-nav mx-auto mt-3 mt-lg-0 mb-2 mb-lg-0 gap-lg-3 text-center">
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="/account/">پنل کاربری</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#about-us">درباره ما</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
