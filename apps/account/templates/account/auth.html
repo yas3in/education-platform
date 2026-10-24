@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block title %}ورود و ثبت نام{% endblock %}
+
+{% block content %}
+<section class="auth-section py-5 d-flex align-items-center">
+    <div class="container">
+        <div class="auth-scene mx-auto">
+            <!-- 3D Floating Decorative Shapes -->
+            <div class="auth-shape shape-cube" aria-hidden="true"></div>
+            <div class="auth-shape shape-ring" aria-hidden="true"></div>
+            <div class="auth-shape shape-sphere" aria-hidden="true"></div>
+            <div class="auth-shape shape-pill" aria-hidden="true"></div>
+
+            <!-- 3D Flip Card -->
+            <div class="auth-flip-card {% if request.GET.mode == 'login' %}is-flipped{% endif %}" id="authFlipCard">
+
+                <!-- FRONT FACE: SIGN UP (ثبت نام) -->
+                <div class="auth-face auth-face-front glass-auth-card p-4 p-md-5">
+                    <h2 class="auth-title fw-bold mb-4 text-end" dir="rtl">ثبت نام</h2>
+                    <form method="post" action="{% url 'account_front:auth' %}" dir="rtl" novalidate>
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="signup">
+                        <div class="row align-items-center g-4">
+                            <!-- Inputs Column -->
+                            <div class="col-12 col-lg-7">
+                                <div class="d-flex flex-column gap-3">
+                                    <input type="text" name="first_name" class="form-control auth-input rounded-pill" placeholder="نام" required>
+                                    <input type="text" name="last_name" class="form-control auth-input rounded-pill" placeholder="نام خانوادگی" required>
+                                    <input type="email" name="email" class="form-control auth-input rounded-pill" placeholder="ایمیل" required>
+                                    <input type="password" name="password" class="form-control auth-input rounded-pill" placeholder="رمز عبور" required>
+                                </div>
+                            </div>
+
+                            <!-- Actions Column -->
+                            <div class="col-12 col-lg-5">
+                                <div class="d-flex flex-column align-items-center text-center gap-3">
+                                    <button type="submit" class="btn auth-submit-btn rounded-pill w-100 py-2 fw-bold">
+                                        ثبت نام
+                                    </button>
+
+                                    <p class="auth-switch-text mb-0 small">
+                                        حساب کاربری دارید؟
+                                        <button type="button" class="btn btn-link p-0 fw-bold auth-switch-btn" data-flip-to="login">
+                                            ورود
+                                        </button>
+                                    </p>
+
+                                    <span class="auth-divider small fw-medium">یا</span>
+
+                                    <button type="button" class="btn auth-social-btn rounded-pill w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                                        </svg>
+                                        <span>ثبت نام با گوگل</span>
+                                    </button>
+
+                                    <button type="button" class="btn auth-social-btn rounded-pill w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true">
+                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                        </svg>
+                                        <span>ثبت نام با فیسبوک</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- BACK FACE: LOG IN (ورود) -->
+                <div class="auth-face auth-face-back glass-auth-card p-4 p-md-5 d-flex flex-column justify-content-center">
+                    <h2 class="auth-title fw-bold mb-4 text-end" dir="rtl">ورود به حساب</h2>
+                    <form method="post" action="{% url 'account_front:auth' %}" dir="rtl" novalidate>
+                        {% csrf_token %}
+                        <input type="hidden" name="form_type" value="login">
+                        <div class="row align-items-center g-4">
+                            <!-- Inputs Column -->
+                            <div class="col-12 col-lg-7">
+                                <div class="d-flex flex-column gap-3">
+                                    <input type="email" name="email" class="form-control auth-input rounded-pill" placeholder="ایمیل" required>
+                                    <input type="password" name="password" class="form-control auth-input rounded-pill" placeholder="رمز عبور" required>
+                                </div>
+                            </div>
+
+                            <!-- Actions Column -->
+                            <div class="col-12 col-lg-5">
+                                <div class="d-flex flex-column align-items-center text-center gap-3">
+                                    <button type="submit" class="btn auth-submit-btn rounded-pill w-100 py-2 fw-bold">
+                                        ورود
+                                    </button>
+
+                                    <p class="auth-switch-text mb-0 small">
+                                        حساب کاربری ندارید؟
+                                        <button type="button" class="btn btn-link p-0 fw-bold auth-switch-btn" data-flip-to="signup">
+                                            ثبت نام
+                                        </button>
+                                    </p>
+
+                                    <span class="auth-divider small fw-medium">یا</span>
+
+                                    <button type="button" class="btn auth-social-btn rounded-pill w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                                        <svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true">
+                                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                                        </svg>
+                                        <span>ورود با گوگل</span>
+                                    </button>
+
+                                    <button type="button" class="btn auth-social-btn rounded-pill w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2" aria-hidden="true">
+                                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                                        </svg>
+                                        <span>ورود با فیسبوک</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
